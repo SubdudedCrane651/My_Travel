@@ -1,3 +1,4 @@
+import matplotlib.pyplot as plt; plt.rcdefaults()
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -6,9 +7,18 @@ import os
 global menuchoice
 menuchoice = False
 
+global spent
+spent = [0,0,0,0,0]
 
-def graph():
-    labels = ['2', '3', '4', '5', '6', '7', '8', '9', '10']
+
+def graph(spent):
+    types = ['airfare', 'tansport', 'hotel', 'food', 'misc']
+    y_pos = np.arange(len(types))
+    plt.bar(y_pos, spent, align='center', alpha=0.5)
+    plt.xticks(y_pos, types)
+    plt.ylabel('Amount')
+    plt.title('Total spent on trip')
+    plt.show()
 
 
 def Save(date, type, amount):
@@ -63,18 +73,23 @@ def Calculate():
         if row['type'] == 'airfare':
             airfare = row['amount']
             airfare_total = airfare_total + airfare
+            spent[0] = airfare_total
         if row['type'] == 'transport':
             transport = row['amount']
             transport_total = transport_total + transport
+            spent[1] = transport_total
         if row['type'] == 'hotel':
             hotel = row['amount']
             hotel_total = hotel_total + hotel
+            spent[2] = hotel_total
         if row['type'] == 'food':
             food = row['amount']
             food_total = food_total + food
+            spent[3]=food_total
         if row['type'] == 'misc':
             misc = row['amount']
             misc_total = misc_total + misc
+            spent[4]=misc_total
 
     for i in range(len(data)):
         amount = data.loc[i, 'amount']
@@ -100,6 +115,9 @@ def Calculate():
           " left over for misc")
     print("You have a total " + "${:,.2f}".format(budget["total"] - total) +
           " left over in the budget")
+  
+    graph(spent)
+
 
 if __name__ == '__main__':
     os.system('clear')
@@ -111,7 +129,7 @@ if __name__ == '__main__':
     else:
 
         print("Enter date,type and amount")
-        date = input("Enter"" date MM/DD/YYYY: ")
+        date = input("Enter" " date MM/DD/YYYY: ")
 
         type = Type()
         amount = input("Enter amount :")
