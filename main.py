@@ -1,4 +1,6 @@
-import matplotlib.pyplot as plt; plt.rcdefaults()
+import matplotlib.pyplot as plt
+
+plt.rcdefaults()
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -8,7 +10,9 @@ global menuchoice
 menuchoice = False
 
 global spent
-spent = [0,0,0,0,0]
+spent = []
+for n in range(5):
+    spent.append(0)
 
 
 def graph(spent):
@@ -85,11 +89,11 @@ def Calculate():
         if row['type'] == 'food':
             food = row['amount']
             food_total = food_total + food
-            spent[3]=food_total
+            spent[3] = food_total
         if row['type'] == 'misc':
             misc = row['amount']
             misc_total = misc_total + misc
-            spent[4]=misc_total
+            spent[4] = misc_total
 
     for i in range(len(data)):
         amount = data.loc[i, 'amount']
@@ -115,7 +119,7 @@ def Calculate():
           " left over for misc")
     print("You have a total " + "${:,.2f}".format(budget["total"] - total) +
           " left over in the budget")
-  
+
     graph(spent)
 
 
@@ -127,10 +131,8 @@ if __name__ == '__main__':
     if choice == 2:
         Calculate()
     else:
-
         print("Enter date,type and amount")
         date = input("Enter" " date MM/DD/YYYY: ")
-
         type = Type()
         amount = input("Enter amount :")
         Save(date, type, amount)
