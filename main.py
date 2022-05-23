@@ -21,8 +21,9 @@ def graph(spent):
     plt.bar(y_pos, spent, align='center', alpha=0.5)
     plt.xticks(y_pos, types)
     plt.ylabel('Amount')
-    plt.title('Total spent on trip')
+    plt.title('Total spent on trip to Walt Disney World')
     plt.tight_layout()
+    plt.savefig("Figure1.png")
     plt.show()
 
 
