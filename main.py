@@ -22,6 +22,7 @@ def graph(spent):
     plt.xticks(y_pos, types)
     plt.ylabel('Amount')
     plt.title('Total spent on trip')
+    plt.tight_layout()
     plt.show()
 
 
